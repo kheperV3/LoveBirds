@@ -11,7 +11,7 @@ See the video here: https://www.youtube.com/watch?v=enLJgY6dZ9U
 
 
 
-This is the method to install from scratch the Love Birds projects. **If you want an easier installation method please follow the intructable here to just burn the prebuilt SD card: **
+This is the method to install from scratch the Love Birds projects. **If you want an easier installation method please follow the intructable here to just burn the prebuilt SD card:**
 
 https://www.instructables.com/id/Love-Birds-a-Box-to-Send-and-Receive-Telegram-Audi/
 or here https://www.raspiaudio.com/lovebirds/
