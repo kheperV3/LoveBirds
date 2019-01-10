@@ -1,28 +1,57 @@
-# LoveBirds
-It’s a standalone device to receive send voice messages with one person: lover, family or friend
-
-
-
 What is Love (birds)? Oh Baby don't hurt me don't hurt me no more
 It’s a standalone device to receive send voice messages with one person: lover, family or friend. Open the box, push on the button while you talk, release to send. Your correspondent will receive the voice message on his Telegram phone app or on his own LoveBirds box with a nice motor move and bird song.
-Oh bloody hell just watch the video : XXX
-
-Ok my phone can already do that, why should I bother?
-It’s way easier to use than a phone, one button, cool for children, old people that don’t like smartphones, long distance relationships or just lovers that want a private line to talk to their second half.
-It’s a dedicated device to privately chat with one person: less is more.
-It’s not mobile so it’s like old landline phone, you take the time to answer from your sofa.
-It’s so cute to see the thing turning when you receive a message when you come back home.
+See the video here: https://www.youtube.com/watch?v=enLJgY6dZ9U
 
 
-Checklist before you start to build one LoveBirds
-1 Raspberry PI Zero (it will also work with raspberry PI 2 or 3 and 3B 3B+, but the zera is smaller and consumes less battery.
-1 micro SD card 8Go or bigger
-1 micro USB cable
-1 MIC+ sound card it is perfect for the job as it has one integrated microphone, and two onboard speakers and it is the size of a Raspberry Pi ZERO
-1 cute box, I bought this one but it is just a suggestion (XXX link)
-1 cheap servo motor found on Amazon (XXX link)
-You Telegram account xxx, if you don’t have one yet it a good occasion to start as this is way more secure for your privacy than Whatsapp or Messenger. To setup one you need a phone, download the app on you store
-Telegram username of the person you will exchange messages with it starts with an @,  by default you don’t have a username, you can choose a public username in the Settings section of Telegram.
-bird:
-https://drive.google.com/file/d/1JxjtstkR707G8izmygNVrsR6kKd-EuqT/view?usp=sharing
+This is the method to install from scratch the Love Birds projects. If you want an easier installation method please follow the intructable here to just burn the prebuilt SD card: 
+https://www.instructables.com/id/Love-Birds-a-Box-to-Send-and-Receive-Telegram-Audi/
+or here https://www.raspiaudio.com/lovebirds/
+
+
+Ok so you want to go the hard way and rebuild it from scratch:
+  Architecture:
+    initWiFi ⇒ initialize wifi access takes the file on /boot/WIFI.txt (easily accessible by just editing the file with a windows computer and SD car reader) and rename it wpa_supplicant.conf and copy it /etc/wpa_supplicant/wpa_supplicant.conf
+    initTG.py ⇒ initialize the telegram connection, to send messages as the user. configuration is done using a web page managed by Flask that basicaly asks the user to give his Telegram phone number, the confirmation received by SMS, and the name of te correspondent (who you want to talk to).It is copying the PHONE and PEER.txt in some file used later by valentin.py
+      . PEER.txt the input format is @JohnBlack
+      . PHONE international format +33777792516
+      . Sms configiration file 12345
+      valentin.py ⇒ the application itself
+
+
+  -Start from a Raspbian Stretch Lite, and burn it on a SD card https://downloads.raspberrypi.org/raspbian_lite_latest
+
+  -Required packages:
+
+      . telethon
+          sudo apt-get install python3-pip
+          sudo pip3 install telethon
+
+      . sox
+          sudo apt-get install sox
+      . vlc
+          sudo apt-get vlc
+       . GPIO
+          sudo apt-get install python3-gpiozero
+          sudo apt-get install python-rpi.gpio python3-rpi.gpio
+        Flask
+          sudo pip3 install flask
+
+
+   -If you use the MIC+ sound card install it, otherwise skip this section. MIC+ it's a cool sound card has it has all in one 2 speakers, microphone and a button led. https://www.raspiaudio.com/raspiaudio-aiy
+        sudo wget -O mic mic.raspiaudio.com
+        sudo bash mic
+      -Say yes for the reboot
+      -On the next reboot you  have to run the test to finish the installation (it is an ALSA oddness):
+        sudo wget -O test test.raspiaudio.com
+        sudo bash test
+      Push the onboard button, you should hear "Front Left" "front Right" then the recorded sequence by the microphone.
+
+
+   -Copy the content of this GIT of the directory /LB in /home/pi/LB
+  - sudo cp /home/pi/LB/rc.local  /etc
+
+
+
+
+
 
