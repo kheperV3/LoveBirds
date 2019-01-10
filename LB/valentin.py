@@ -106,6 +106,7 @@ async def recTG():
                 playOK = True
                 playOKD = 30
                 if recD > 1:
+                    os.system('sudo killall sox')
                     os.system('/usr/bin/sox /home/pi/rec.wav /home/pi/rec.ogg')
                     os.rename('/home/pi/rec.ogg', '/home/pi/rec.oga')
                     await client.send_file(peer, '/home/pi/rec.oga',voice_note=True)
@@ -209,10 +210,14 @@ async def playTG():
             
         if (toPlay >= 0) and (playOK == True):
             while playing <= toPlay:
-                name = '/home/pi/play' + str(playing) + '.ogg'  
+                name = '/home/pi/play' + str(playing) + '.ogg'
+                os.system('sudo killall vlc')
+
                 pid = os.fork()
                 if pid == 0 :
-                    os.execl('/usr/bin/cvlc', 'cvlc', '--play-and-exit', name, '')
+                    os.execl('/usr/bin/cvlc', 'cvlc', name,  '--play-and-exit')
+                    #os.execl('/usr/bin/cvlc', 'cvlc',  name, ' vlc://quit')
+
                 os.wait()         
                 playing = playing + 1
                 if playing <= toPlay :
@@ -228,7 +233,7 @@ async def playTG():
 
 """
 initialization of the application and user for telegram
-init of the name of the correspondant with the file /boot/peer
+init of the name of the correspondant with the file /boot/PEER.txt
 declaration of the handler for the messages arrival
 filtering of message coming from the correspondant
 download of file .oga renamed .ogg
@@ -285,6 +290,7 @@ async def receiveTG(event):
             toPlay =   toPlay + 1
             #print(toPlay)
             if toPlay == 0:
+                #os.system('/usr/bin/cvlc --play-and-exit /home/pi/LB/lovebird.wav')
                 os.system('/usr/bin/cvlc --play-and-exit /home/pi/LB/lovebird.wav')
             name = '/home/pi/play' + str(toPlay) +  '.ogg'
             #print(name)
@@ -296,7 +302,9 @@ async def receiveTG(event):
 Main sequence (handler receiveTG), playTG, timeC, recTG, motor et heartBeat are excuted in parallel
 
 """
+#os.system('/usr/bin/cvlc /home/pi/LB/lovebird.wav vlc://quit')
 os.system('/usr/bin/cvlc --play-and-exit /home/pi/LB/lovebird.wav')
+
 loop = asyncio.get_event_loop()
 loop.create_task(recTG())
 loop.create_task(playTG())

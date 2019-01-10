@@ -34,6 +34,10 @@ p = open("/etc/wpa_supplicant/wpa_supplicant.conf", O_WRONLY+O_CREAT, 0644);
 n=write(p, b, n);
 close(p);
 
+//restart service with new config
+system("sudo systemctl daemon-reload");
+system("sudo systemctl restart dhcpcd");
+
 //remove("/boot/WIFI.txt");
 
 //system("shutdown -r now"); 

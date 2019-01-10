@@ -9,6 +9,9 @@
       <h1>LOVE BIRDS</h1> 
 <h2>A box to send voice message to your love ones</h2> 
       <h4> {{ time }}</h4>
+      <h4> Your current Telegram phone: {{ currentPhone }}</h4>
+      <h4> Your current correspondent : {{ currentPeer }}</h4>
+
       <form  method = "post">
 
 <hr> 
@@ -16,14 +19,18 @@
             <p> 1- From a Windows or Linux computer load the SD card and edit the WIFI.txt file on /boot with your credentials  </p>
 <hr> 
     <h2>Authorize the Raspberry Pi to send message with your Telegram</h2> 
-           <p> 2- enter your phone #</p>
+           <p> 2- enter your phone # and click OK</p>
            <p><input type = "text" name = "phone" />  <input type = "submit" value = "ok" /> </p>  
-           <p> 3- enter the key sent by Telegram</p>
+           <p> 3- In the next 30s you should receive on your phone the 5 digits key sent by Telegram, then clicHTMLHk OK</p>
            <p><input type = "text" name = "key" /><input type = "submit" value = "ok" /> </p>
+
+
 <hr> 
     <h2>Set the username of your correspondent</h2> 
-           <p> 4- enter the username of your peer (person you want to talk to) (@FirstnameLastname  ie @JohnSmith)</p>
+           <p> 4- enter the username of your peer (person you want to talk to) (@FirstnameLastname  ie @JohnSmith) Then click OK</p>
            <p><input type = "text" name = "peer" /> <input type ="submit" value = "ok" /> </p>
+           <p> it will reboot your raspberry wait 2 minutes if everything worked well you should hear a Love bird singing. You cn then hold the yellow button to send message, and short push to listen</p>
+
       </form>
        </div>
    </body>

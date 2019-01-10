@@ -10,22 +10,30 @@ def index():
 
     now = datetime.datetime.now()
     timeString = now.strftime("%H:%M:%S      %d/%m/%Y")
-    template = {
-        'title' : 'LOVE BIRDS',
-        'time' : timeString
-        }
+    
+    txt = open('/boot/PEER.txt', 'r')
+    currentPeer = txt.read()
+    txt.close()
+
+    txt = open('/home/pi/phone', 'r')
+    currentPhone = txt.read()
+    txt.close()
+
+
+
     if request.method == 'POST':
         peer = request.form['peer']
         if len(peer) > 0:
-            f = open('/boot/peer', 'w')
+            f = open('/boot/PEER.txt', 'w')
             f.write(peer)
             f.close()
-            #os.system('chown pi /home/pi/peer')
+            os.system('sudo reboot&')
             #os.system('chgrp pi /home/pi/peer')
         phone = request.form['phone']
         if len(phone) > 0:
             f = open('/home/pi/phone', 'w')
             f.write(phone)
+            currentPhone = phone
             f.close()
             os.system('chown pi /home/pi/phone')
             os.system('chgrp pi /home/pi/phone')
@@ -36,6 +44,14 @@ def index():
             f.close()
             os.system('chown pi /home/pi/key')
             os.system('chgrp pi /home/pi/key')
+
+    template = {
+        'title' : 'LOVE BIRDS',
+        'time' : timeString,
+        'currentPeer' : currentPeer,
+        'currentPhone' : currentPhone
+        }
+
 
     return  render_template('index.html', **template)
 
