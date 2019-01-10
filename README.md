@@ -85,9 +85,10 @@ or here https://www.raspiaudio.com/lovebirds/
       
 
 
-  ##### Copy the content of this GIT of the directory /LB in /home/pi/LB
-   
-  ##### sudo cp /home/pi/LB/rc.local  /etc
+  ##### Start the programs on boot
+  Copy the content of this GIT of the directory /LB in /home/pi/LB
+  sudo cp /home/pi/LB/rc.local  /etc
+  boot the sytem and start a browser from any computer of your local network to complete the configuration of Telegram (see the instructable from that point.)
   
 
 
