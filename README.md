@@ -22,8 +22,8 @@ or here https://www.raspiaudio.com/lovebirds/
  
 #### Architecture:
   
-    initWiFi ⇒ initialize wifi access takes the file on /boot/WIFI.txt (easily accessible by just editing the file with a windows computer and SD car reader) and rename it wpa_supplicant.conf and copy it /etc/wpa_supplicant/wpa_supplicant.conf
-    
+Wifi initialization: it uses a built-in Raspbian feature just edit a wpa_supplicant.conf file with your credential and copy it on /boot (fat32 volume that is accessible form any computer reading your SD card) put it back in your raspberry PI and reboot, you should be connected to your Wifi.
+
     initTG.py ⇒ initialize the telegram connection, to send messages as the user. configuration is done using a web page managed by Flask that basicaly asks the user to give his Telegram phone number, the confirmation received by SMS, and the name of te correspondent (who you want to talk to).It is copying the PHONE and PEER.txt in some file used later by valentin.py
     
       . PEER.txt the input format is @JohnBlack
@@ -87,6 +87,7 @@ or here https://www.raspiaudio.com/lovebirds/
 
   ##### Start the programs on boot
   Copy the content of this GIT of the directory /LB in /home/pi/LB
+  to start the valentin program at startup :
   sudo cp /home/pi/LB/rc.local  /etc
   boot the sytem and start a browser from any computer of your local network to complete the configuration of Telegram (see the instructable from that point.)
   
