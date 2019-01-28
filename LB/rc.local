@@ -17,6 +17,5 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-/home/pi/LB/initWiFi&
 sudo -H -u pi -i  /home/pi/LB/startLB
 exit 0

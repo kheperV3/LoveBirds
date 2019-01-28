@@ -1,5 +1,0 @@
-#!//bin/bash
-sleep 3
-cd /home/pi/LB
-/usr/bin/python3.5 /home/pi/LB/valentin.py&
-sudo /usr/bin/python3.5 /home/pi/LB/initTG.py&

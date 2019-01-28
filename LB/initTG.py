@@ -37,6 +37,7 @@ def index():
             f.close()
             os.system('chown pi /home/pi/phone')
             os.system('chgrp pi /home/pi/phone')
+            os.system('sudo reboot&')
         key = request.form['key']
         if len(key) > 0:
             f = open('/home/pi/key', 'w')

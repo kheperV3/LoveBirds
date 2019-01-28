@@ -252,7 +252,7 @@ if not  client.is_user_authorized():
     f = open('/home/pi/phone', 'r')
     phone = f.read()
     f.close()
-    os.remove('/home/pi/phone')
+    #os.remove('/home/pi/phone')
     print(phone)
 
     asyncio.sleep(2)
