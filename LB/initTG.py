@@ -45,6 +45,13 @@ def index():
             f.close()
             os.system('chown pi /home/pi/key')
             os.system('chgrp pi /home/pi/key')
+        password = request.form['password']
+        if len(password) > 0:
+            f = open('/home/pi/password', 'w')
+            f.write(password)
+            f.close()
+            os.system('chown pi /home/pi/password')
+            os.system('chgrp pi /home/pi/password')
 
     template = {
         'title' : 'LOVE BIRDS',
