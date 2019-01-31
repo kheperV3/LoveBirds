@@ -266,7 +266,14 @@ if not  client.is_user_authorized():
     print (key)
     os.remove('/home/pi/key')
     asyncio.sleep(2)
-    me = client.sign_in(phone=phone, code=key)
+    try: 
+        me = client.sign_in(phone=phone, code=key)
+    except SessionPasswordNeededError:
+	f = open('/home/pi/password', 'r')
+        password = f.read()
+        f.close()
+        os.remove('/home/pi/password')
+	me = client.sign_in(password=password)
 GPIO.output(playLED, GPIO.LOW)        
 motorON=False
 
