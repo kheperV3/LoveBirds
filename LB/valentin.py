@@ -9,6 +9,7 @@ import sys
 import signal
 from telethon import TelegramClient, events, sync
 from telethon.tl.types import InputMessagesFilterVoice
+from telethon.errors import SessionPasswordNeededError
 import RPi.GPIO as GPIO
 from gpiozero import Servo
 from time import sleep
