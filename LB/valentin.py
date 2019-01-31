@@ -269,11 +269,11 @@ if not  client.is_user_authorized():
     try: 
         me = client.sign_in(phone=phone, code=key)
     except SessionPasswordNeededError:
-	f = open('/home/pi/password', 'r')
+        f = open('/home/pi/password', 'r')
         password = f.read()
         f.close()
         os.remove('/home/pi/password')
-	me = client.sign_in(password=password)
+        me = client.sign_in(password=password)
 GPIO.output(playLED, GPIO.LOW)        
 motorON=False
 
