@@ -80,8 +80,8 @@ async def recTG():
     Send a message 'voice'
     initialisation of gpio led and button
     when button is pushed: recording in a separate process
-    that is killed when the button is released
-    conversion to .oga by sox
+    that is stopped when the button is released
+    conversion to .oga by opusenc
     """
     global recD
     global playOK
@@ -99,17 +99,16 @@ async def recTG():
             else:
                 while GPIO.input(recBUT) == GPIO.LOW :
                     await asyncio.sleep(delay)
-                os.kill(pid, signal.SIGKILL)
+                os.kill(pid, signal.SIGHUP)
                 heartBeatLed = False
                 #GPIO.output(recLED, GPIO.LOW)
                 p.ChangeDutyCycle(0) #turns OFF the REC LED
                 playOK = True
                 playOKD = 30
                 if recD > 1:
-                    os.system('sudo killall sox')
-                    os.system('/usr/bin/sox /home/pi/rec.wav /home/pi/rec.ogg')
-                    os.rename('/home/pi/rec.ogg', '/home/pi/rec.oga')
-                    await client.send_file(peer, '/home/pi/rec.oga',voice_note=True)
+                    os.system('/usr/bin/opusenc /home/pi/record.wav /home/pi/record.oga')
+                    await client.send_file(peer, '/home/pi/record.oga', caption='LoveBirds Message', voice_note=True)
+
         else:
             #heartBeatLed = False
             #GPIO.output(recLED, GPIO.LOW)

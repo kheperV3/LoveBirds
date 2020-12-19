@@ -50,18 +50,22 @@ Wifi initialization: it uses a built-in Raspbian feature just edit a wpa_supplic
       . sox
       
           sudo apt-get install sox
+
+      . opus
+
+          sudo apt-get install opus-tools
           
       . vlc
       
-          sudo apt-get vlc
+          sudo apt-get install vlc
           
-       . GPIO
+      . GPIO
        
           sudo apt-get install python3-gpiozero
           
           sudo apt-get install python-rpi.gpio python3-rpi.gpio
           
-        Flask
+      . Flask
         
           sudo pip3 install flask
           
